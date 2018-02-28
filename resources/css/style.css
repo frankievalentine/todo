@@ -9,6 +9,10 @@ body, input, button {
   font-family: 'Roboto', sans-serif;
 }
 
+.noFill {
+  fill: none;
+}
+
 header {
   width: 100%;
   height: 80px;
@@ -45,7 +49,7 @@ header input {
   -moz-appearance: none;
   -ms-appearance: none;
   -o-appearance: none;
-  appearance: none;
+  -appearance: none;
 }
 
 header input::-webkit-input-placeholder {
@@ -82,7 +86,7 @@ header button {
   -moz-appearance: none;
   -ms-appearance: none;
   -o-appearance: none;
-  appearance: none;
+  -appearance: none;
 }
 
 header button svg {
@@ -153,7 +157,7 @@ ul.todo li .buttons button {
   -moz-appearance: none;
   -ms-appearance: none;
   -o-appearance: none;
-  appearance: none;
+  -appearance: none;
 }
 
 ul.todo li .buttons button:last-of-type:before {
@@ -175,8 +179,52 @@ ul.todo li .buttons button svg {
   margin: -11px 0 0 -11px;
 }
 
+ul.todo li .buttons button.complete svg {
+  border-radius: 11px;
+  border: 1.5px solid #25b99a;
+
+  transition: background 0.2 ease;
+}
+
+ul.todo#completed li .buttons button.complete svg {
+  background: #25b99a;
+  border: 0px;
+}
+
+ul.todo:not(#completed) li .buttons button.complete:hover svg {
+  background: rgba(37, 185, 154, 0.5);
+}
+
+ul.todo:not(#completed) li .buttons button.complete:hover svg .fill {
+  fill: #fff;
+}
+
+ul.todo#completed:not(:empty) {
+  position: relative;
+  padding: 60px 0 0 0;
+}
+
+/* seperate finished todos */
+ul.todo#completed:not(:empty):before {
+  content: '';
+  width: 150px;
+  height: 1px;
+  background: #d8e5e0;
+  position: absolute;
+  top: 30px;
+  left: 50%;
+  margin: 0 0 0 -75px;
+}
+
+ul.todo#completed li .buttons button.complete svg .fill {
+  fill: #fff;
+}
+
 ul.todo li .buttons button svg .fill {
-  
+  -webkit-transition:fill 0.2s ease;
+  -moz-transition:fill 0.2s ease;
+  -ms-transition:fill 0.2s ease;
+  -o-transition:fill 0.2s ease;
   transition:fill 0.2s ease;
 }
 
@@ -186,4 +234,8 @@ ul.todo li .buttons button.remove svg .fill {
 
 ul.todo li .buttons button.remove:hover svg .fill {
   fill: #e85656;
+}
+
+ul.todo li .buttons button.complete svg .fill {
+  fill: #25b99a;
 }
