@@ -38,6 +38,8 @@ function addItem (value) {
   addItemToDOM(value);
   // reset value in placeholder once added
   document.getElementById('item').value = '';
+  // API
+  sendItemToAPI(value);
 
   data.todo.push(value);
   dataObjectUpdated();
@@ -142,4 +144,22 @@ function addItemToDOM(text, completed) {
 
   // insert the newly created todos before the first child of ul
   list.insertBefore(item, list.childNodes[0]);
+}
+
+// Method for sending to-do item to API
+function sendItemToAPI(item) {
+  var req = new XMLHttpRequest();
+  req.open('POST', '/add');
+  req.setRequestHeader('Content-Type', 'application/json');
+  req.send(JSON.stringify({ item: item }));
+
+  req.addEventListener('load', () => {
+    // console.log(req.responseText);
+    console.log('Request done.');
+  });
+
+  req.addEventListener('error', () => {
+    console.log("Damn, error.");
+    console.log(e);
+  });
 }
